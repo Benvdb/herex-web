@@ -33,7 +33,7 @@
    <p class="col-xs-2">Search:<p> <input type="text" ng-model="search.name" class="col-xs-10">
     </div>
   <ul>
-    <li ng-repeat="todo in todos | orderBy: '-!completed' | filter: search" ng-show="verifyAuthor(todo)" class="row">
+    <li ng-repeat="todo in todos | filter: search" ng-show="verifyAuthor(todo)" class="row">
      <!-- <div ng-class="{'btn btn-success col-xs-1': todo.completed == 'true', 'btn btn-danger col-xs-1': todo.completed == 'false'}">-->
         <div ng-class="todo.completed ? 'btn btn-success col-xs-1' : 'btn btn-danger col-xs-1'" id="colorContainer" style="font-size: 2em">
       <input type="checkbox" ng-model="todo.completed"ng-change="update($index)" class="form-check-input">
