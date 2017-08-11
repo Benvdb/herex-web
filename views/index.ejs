@@ -1,0 +1,131 @@
+<html>
+<head>
+  <title>Mijn Todo lijst</title>
+  <link href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet">
+  <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.3.10/angular.min.js"></script>
+  <script src="http://cdnjs.cloudflare.com/ajax/libs/angular-ui-router/0.2.10/angular-ui-router.js"></script>
+  <script src="/javascripts/angularApp.js"></script>
+  <style> .glyphicon-thumbs-up { cursor:pointer } </style>
+</head>
+
+<body ng-app="todolijst">
+  <nav class="navbar navbar-default pull-right" ng-controller="NavCtrl">
+    <ul class="nav navbar-nav">
+      <li ng-show="isLoggedIn()"><a>{{ currentUser() }}</a></li>
+      <li ng-show="isLoggedIn()"><a href="" ng-click="logOut()">Log Out</a></li>
+      <li ng-hide="isLoggedIn()"><a href="/#/login">Log In</a></li>
+      <li ng-hide="isLoggedIn()"><a href="/#/register">Register</a></li>
+    </ul>
+  </nav>
+  <div class="row">
+    <div class="col-md-6 col-md-offset-3">
+
+      <!-- When this detects a route change it wil place the new state's template inside this tag and
+          initialize the controller specified in the config -->
+
+    <ui-view></ui-view>
+
+    </div>
+  </div>
+</body>
+
+
+
+<!-- home | todolijst-->
+<script type="text/ng-template" id="/home.html">
+<h1>Mijn todo-lijst</h1>
+  <span ng-show='isLoggedIn()'>
+   Search: <input type="text" ng-model="search.name">
+  <ul>
+    <li ng-repeat="todo in todos | filter: search">
+      <input type="checkbox" ng-model="todo.completed" ng-change="update($index)">
+      <a ng-show="!editing[$index]" href="#/todos/{{todo._id}}">{{todo.name}}</a>
+      <button ng-show="!editing[$index]" ng-click="edit($index)">edit</button>
+      <input ng-show="editing[$index]" type="text" ng-model="todo.name" name="name" id="name">
+      <button ng-show="editing[$index]" ng-click="update($index)">Update</button>
+      <button ng-show="!editing[$index]" ng-click="remove($index)">remove</button>
+      <button ng-show="editing[$index]" ng-click="cancel($index)">Cancel</button>
+    </li>
+  </ul>
+  New task <input type="text" ng-model="newTodo"><button ng-click="addTodo()">Create</button>
+</span>
+<div ng-hide="isLoggedIn()">
+  <h3>You need to <a href="/#/login">Log In</a> or <a href="/#/register">Register</a> before you can manage your to-do list.</h3>
+</div>
+</script>
+
+
+
+<!--todo details-->
+<script type="text/ng-template" id="/todoDetails.html">
+      <h1>{{ todo.name }}</h1>
+      completed: <input type="checkbox" ng-model="todo.completed"><br>
+      note: <textarea ng-model="todo.note"></textarea><br><br>
+
+      <button ng-click="addNote()">Update</button>
+      <button ng-click="remove()">remove</button>
+      <a href="#/home">Cancel</a>
+    </script>
+
+
+
+<!---register-->
+<script type="text/ng-template" id="/register.html">
+  <div class="page-header">
+    <h1>Todo-lijst</h1>
+  </div>
+
+  <div ng-show="error" class="alert alert-danger row">
+    <span>{{ error.message }}</span>
+  </div>
+
+  <form ng-submit="register()"
+    style="margin-top:30px;">
+    <h3>Register</h3>
+
+    <div class="form-group">
+      <input type="text"
+      class="form-control"
+      placeholder="Username"
+      ng-model="user.username"></input>
+    </div>
+    <div class="form-group">
+      <input type="password"
+      class="form-control"
+      placeholder="Password"
+      ng-model="user.password"></input>
+    </div>
+    <button type="submit" class="btn btn-primary">Register</button>
+  </form>
+</script>
+
+<!--login-->
+<script type="text/ng-template" id="/login.html">
+  <div class="page-header">
+    <h1>Todo-lijst</h1>
+  </div>
+
+  <div ng-show="error" class="alert alert-danger row">
+    <span>{{ error.message }}</span>
+  </div>
+
+  <form ng-submit="logIn()"
+    style="margin-top:30px;">
+    <h3>Log In</h3>
+
+    <div class="form-group">
+      <input type="text"
+      class="form-control"
+      placeholder="Username"
+      ng-model="user.username"></input>
+    </div>
+    <div class="form-group">
+      <input type="password"
+      class="form-control"
+      placeholder="Password"
+      ng-model="user.password"></input>
+    </div>
+    <button type="submit" class="btn btn-primary">Log In</button>
+  </form>
+</script>
+</html>
