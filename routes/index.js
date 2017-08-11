@@ -76,8 +76,9 @@ router.get('/todos', function(req, res, next) {
 });
 
 
-router.post('/todos' ,function(req, res, next) {
+router.post('/todos', auth ,function(req, res, next) {
   var todo = new Todo(req.body);
+  todo.author = req.payload.username;
   todo.save(function(err, todo){
     if(err){ return next(err); }
 
@@ -93,9 +94,9 @@ router.get('/todos/:id', function(req, res, next) {
   });
 });
 
-router.put('/todos/:todo', function(req,res,next){
+router.put('/todos/:todo', auth, function(req,res,next){
   console.log(JSON.stringify(req.body));
-  console.log(req.body.name);
+  console.log(req.body.author);
   console.log(req.body.completed);
   console.log(req.body._id);
 

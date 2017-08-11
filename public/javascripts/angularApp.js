@@ -76,7 +76,9 @@ app.factory('todos', ['$http','auth',function($http,auth){
   
   o.update = function(todo){
     console.log("o.update " + todo.name);
-    return $http.put('/todos/'+ todo._id, todo).then(function(data){
+    return $http.put('/todos/'+ todo._id, todo, {
+      headers: {Authorization: 'Bearer '+auth.getToken()}
+    }).then(function(data){
       angular.copy(todo);
     });
   }
@@ -98,8 +100,13 @@ app.controller('MainCtrl', [
   function($scope,todos,auth){
 
     $scope.editing = [];
-    
+
+
     $scope.todos = todos.todos;
+
+    $scope.verifyAuthor = function(todo) {
+      return todo.author === auth.currentUser();
+    }
 
       $scope.isLoggedIn = auth.isLoggedIn;
 
@@ -107,6 +114,7 @@ app.controller('MainCtrl', [
     if($scope.newTodo === '') { return; }
     todos.create({
       name: $scope.newTodo,
+      author: 'payload.username',
       completed: false,
       note:''
     });
@@ -122,17 +130,26 @@ app.controller('MainCtrl', [
 
   }
 
+  $scope.cancel = function(index){
+            $scope.todos[index] = angular.copy($scope.editing[index]);
+            $scope.editing[index] = false;
+          }
+
   $scope.edit = function(index){
             $scope.editing[index] = angular.copy($scope.todos[index]);
           }
 
   $scope.update = function(index){
+    
     var todo = $scope.todos[index];
     console.log("scope.update " + todo.name);
     todos.update(todo);
     $scope.editing[index] = false;
   }
-  }]);
+ }]);
+
+
+  
 
 app.controller('TodoDetailCtrl', ['$scope','todos','todo','auth','$state', function($scope,todos,todo,auth,$state){
 $scope.todo = todo;
