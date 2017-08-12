@@ -1,3 +1,6 @@
+//Gebruikt van bestaand flapper-news project
+
+
 var mongoose = require('mongoose');
 var crypto = require('crypto');
 //jasonwebtoken, geinstalleerd via npm install jasonwebtoken --save

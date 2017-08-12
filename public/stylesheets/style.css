@@ -1,0 +1,94 @@
+
+.customAnimation {
+    background-color : white;
+    padding          : 5px;
+    height: 28px;
+    transition       : all linear 2s;
+}
+
+.customClick {
+    background-color : #f4eb42;
+    padding          : 5px;
+    height: 100px;
+}
+
+.customAnimation.customClick-add {
+    -webkit-animation : 1s ng-class-animation;
+    -moz-animation    : 1s ng-class-animation;
+    -ms-animation     : 1s ng-class-animation;
+    -o-animation      : 1s ng-class-animation;
+    animation         : 1s ng-class-animation;
+}
+
+@-webkit-keyframes ng-class-animation {
+    from {
+        background-color : white;
+        border           : 1px solid black;
+    }
+    to {
+        background-color : black;
+        border           : 1px solid white;
+    }
+}
+
+@-moz-keyframes ng-class-animation {
+    from {
+        background-color : white;
+        border           : 1px solid black;
+    }
+    to {
+        background-color : black;
+        border           : 1px solid white;
+    }
+}
+
+@-ms-keyframes ng-class-animation {
+    from {
+        background-color : white;
+        border           : 1px solid black;
+    }
+    to {
+        background-color : black;
+        border           : 1px solid white;
+    }
+}
+
+@-o-keyframes ng-class-animation {
+    from {
+        background-color : white;
+        border           : 1px solid black;
+    }
+    to {
+        background-color : black;
+        border           : 1px solid white;
+    }
+}
+
+@keyframes ng-class-animation {
+    from {
+        background-color : white;
+        border           : 1px solid black;
+    }
+    to {
+        background-color : black;
+        border           : 1px solid white;
+    }
+}
+
+
+@media all and (max-width: 1200px) { /* screen size until 1200px */
+    
+}
+@media all and (max-width: 1000px) { /* screen size until 1000px */
+   
+    }
+@media all and (max-width: 500px) { /* screen size until 500px */
+
+    h1 {
+        font-size: 1em;
+        font-weight: bold;
+    }
+    div {
+        margin: 5px;
+    }
+    }

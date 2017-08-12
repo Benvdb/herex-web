@@ -161,7 +161,6 @@ console.log("updateFunc");
             $state.go('home');
 }
 
-
 }]);
 
 
@@ -248,3 +247,29 @@ function($scope, auth){
   $scope.logOut = auth.logOut;
 }]);
 
+app.directive('customDirective', function ($animate) {
+        return {
+            link : function ($scope, $element, $attrs) {
+                //var isActive = true;
+                $element.on('focus', function () {
+                  $animate.addClass($element, 'customClick');
+                  console.log("onfocus");
+                   // isActive = !isActive;
+                 /*   console.log(isActive);
+                    // Toggle between add class and remove class
+                    if (isActive) {
+                        $animate.addClass($element, 'customClick');
+                    } else {
+                        $animate.removeClass($element, 'customClick');
+                    }*/
+                    //Trigger digest in this case, because this listener function is out of the angular world
+                    $scope.$apply();
+                });
+                  $element.on('blur', function() {
+                    $animate.removeClass($element, 'customClick');
+                    console.log("onBlur");
+                    $scope.$apply();
+                  });
+            }
+        }
+    });
