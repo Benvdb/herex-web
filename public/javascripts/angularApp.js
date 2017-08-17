@@ -58,7 +58,7 @@ app.factory('todos', ['$http','auth',function($http,auth){
   
       o.getAll = function() {
       return $http.get('/todos').success(function(data){
-        angular.copy(data, o.todos);
+        angular.copy(data,o.todos);
       });
     };
     o.create = function(todo) {
