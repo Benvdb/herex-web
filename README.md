@@ -3,9 +3,9 @@
 Ben Van Den Bossche
 
 install dependencies: 
-npm install
+# npm install
 
 run project:
-npm start
+ # npm start
 
 
