@@ -1,3 +1,4 @@
+//Aangepaste file van internet
 // Include gulp
 var gulp = require('gulp');
 
@@ -14,13 +15,6 @@ gulp.task('lint', function() {
         .pipe(jshint())
         .pipe(jshint.reporter('default'));
 });
-/*
-// Compile Our Sass
-gulp.task('sass', function() {
-    return gulp.src('scss/*.scss')
-        .pipe(sass())
-        .pipe(gulp.dest('dist/css'));
-});*/
 
 // Concatenate & Minify JS
 gulp.task('scripts', function() {
@@ -35,7 +29,7 @@ gulp.task('scripts', function() {
 // Watch Files For Changes
 gulp.task('watch', function() {
     gulp.watch('*/*.js', ['lint', 'scripts']);
-  //  gulp.watch('scss/*.scss', ['sass']);
+
 });
 
 // Default Task

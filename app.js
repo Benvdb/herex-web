@@ -9,8 +9,8 @@ var bodyParser = require('body-parser');
 //connectie met mongodb
 var mongoose = require('mongoose');
 require('./models/Todos')
-//mongoose.connect('mongodb://ben:ben@ds131583.mlab.com:31583/todolijst');
-mongoose.connect('mongodb://localhost/todos');
+mongoose.connect('mongodb://ben:ben@ds131583.mlab.com:31583/todolijst');
+//mongoose.connect('mongodb://localhost/todos');
 var passport = require('passport');
 require('./models/Users');
 require('./config/passport');
